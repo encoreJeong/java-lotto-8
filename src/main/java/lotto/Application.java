@@ -5,6 +5,7 @@ import lotto.io.ConsoleInputProvider;
 import lotto.io.ConsoleOutputProvider;
 import lotto.io.InputProvider;
 import lotto.io.OutputProvider;
+import lotto.model.Lotto;
 import lotto.view.View;
 import lotto.view.ViewBuilder;
 
@@ -21,6 +22,8 @@ public class Application {
                 .build();
 
         Budget budget = view.getBudget();
+
+        Lotto lotto = view.getLotto();
 
     }
 

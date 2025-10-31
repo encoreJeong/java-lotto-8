@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.model.Budget;
+import lotto.model.Lotto;
 
 public class ExceptionHandlingView implements View {
 
@@ -17,7 +18,17 @@ public class ExceptionHandlingView implements View {
                 return delegate.getBudget();
             } catch (IllegalArgumentException e) {
                 show(e.getMessage());
-                continue;
+            }
+        }
+    }
+
+    @Override
+    public Lotto getLotto() {
+        while (true) {
+            try {
+                return delegate.getLotto();
+            } catch (IllegalArgumentException e) {
+                show(e.getMessage());
             }
         }
     }

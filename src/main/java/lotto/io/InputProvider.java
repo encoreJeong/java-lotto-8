@@ -1,6 +1,9 @@
 package lotto.io;
 
+import java.util.List;
+
 public interface InputProvider {
-    String readString();
     Integer readInteger();
+    List<Integer> readIntegers();
+    String readConsoleLine();
 }
