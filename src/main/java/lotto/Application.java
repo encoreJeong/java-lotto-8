@@ -1,7 +1,27 @@
 package lotto;
 
+import lotto.model.Budget;
+import lotto.io.ConsoleInputProvider;
+import lotto.io.ConsoleOutputProvider;
+import lotto.io.InputProvider;
+import lotto.io.OutputProvider;
+import lotto.view.View;
+import lotto.view.ViewBuilder;
+
 public class Application {
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+
+        InputProvider inputProvider = new ConsoleInputProvider();
+        OutputProvider outputProvider = new ConsoleOutputProvider();
+
+        View view = new ViewBuilder()
+                .input(inputProvider)
+                .output(outputProvider)
+                .withExceptionHandling()
+                .build();
+
+        Budget budget = view.getBudget();
+
     }
+
 }
