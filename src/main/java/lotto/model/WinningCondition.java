@@ -24,7 +24,14 @@ public class WinningCondition {
     private static void validateNotDup(Lotto lotto, Bonus bonus) {
         if(lotto.contains(bonus))
             throw new IllegalArgumentException(DUPLICATED_BONUS.getMessage());
+    }
 
+    public Lotto getWinningNumbers() {
+        return winningNumbers;
+    }
+
+    public Bonus getBonus() {
+        return number;
     }
 
 }

@@ -23,7 +23,7 @@ public class Lotto {
     }
 
     private static void validateSize(List<Integer> numbers) {
-        if (numbers.size() != 6) {
+        if (numbers.size() != LottoRule.LOTTO_SIZE.value) {
             throw new IllegalArgumentException(ExceptionMessage.NUMBER_COUNT_INVALID.getMessage());
         }
     }
@@ -52,4 +52,8 @@ public class Lotto {
         return numbers.contains(bonus.getNumber());
     }
 
+    public int countMatched(Lotto other) {
+        Set<Integer> others = new HashSet<>(other.numbers);
+        return Math.toIntExact(this.numbers.stream().filter(others::contains).count());
+    }
 }

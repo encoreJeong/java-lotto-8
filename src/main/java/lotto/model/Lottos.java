@@ -2,6 +2,7 @@ package lotto.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class Lottos {
 
@@ -25,5 +26,9 @@ public class Lottos {
 
     public int size() {
         return lottos.size();
+    }
+
+    public Stream<Lotto> stream() {
+        return lottos.stream();
     }
 }

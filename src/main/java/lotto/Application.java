@@ -1,11 +1,14 @@
 package lotto;
 
+import java.util.List;
+import lotto.enums.WinningRank;
 import lotto.model.Budget;
 import lotto.io.ConsoleInputProvider;
 import lotto.io.ConsoleOutputProvider;
 import lotto.io.InputProvider;
 import lotto.io.OutputProvider;
 import lotto.model.Lotto;
+import lotto.model.LottoMatcher;
 import lotto.model.Lottos;
 import lotto.model.WinningCondition;
 import lotto.view.View;
@@ -32,6 +35,10 @@ public class Application {
         for(int i = 0; i < lottoQuantity; i++) {
             issuedLottos.add(Lotto.issue());
         }
+
+        LottoMatcher matcher = LottoMatcher.of(issuedLottos, winningCondition);
+        List<WinningRank> result = matcher.getMatchResults();
+
 
     }
 
