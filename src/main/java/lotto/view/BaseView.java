@@ -4,8 +4,10 @@ import java.util.List;
 import lotto.io.InputProvider;
 import lotto.io.OutputProvider;
 import lotto.message.PromptMessage;
+import lotto.model.Bonus;
 import lotto.model.Budget;
 import lotto.model.Lotto;
+import lotto.model.WinningCondition;
 
 public class BaseView implements View {
 
@@ -24,9 +26,22 @@ public class BaseView implements View {
     }
 
     @Override
+    public WinningCondition getWinningCondition() {
+        Lotto winningNumbers = getLotto();
+        Bonus bonus = getBonus();
+        return WinningCondition.of(winningNumbers, bonus);
+    }
+
+    @Override
     public Lotto getLotto() {
         show(PromptMessage.LOTTO.getMessage());
         return new Lotto(readIntegers());
+    }
+
+    @Override
+    public Bonus getBonus() {
+        show(PromptMessage.BONUS.getMessage());
+        return Bonus.of(readInteger());
     }
 
     @Override
