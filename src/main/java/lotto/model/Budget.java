@@ -1,11 +1,9 @@
 package lotto.model;
 
+import lotto.enums.LottoRule;
 import lotto.message.ExceptionMessage;
 
 public class Budget {
-
-    private static final int LOTTO_PRICE = 1000;
-    private static final int MIN_PURCHASE_QUANTITY = 1;
 
     private final int budget;
 
@@ -38,6 +36,11 @@ public class Budget {
     private static int getAffordableLottoQuantity(int budget) {
         return budget / LOTTO_PRICE;
     }
+
+    public int getAffordableLottoQuantity() {
+        return budget / LottoRule.LOTTO_PRICE.value;
+    }
+
 
     public int getInt() {
         return budget;

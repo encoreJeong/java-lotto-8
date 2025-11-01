@@ -1,8 +1,10 @@
 package lotto.model;
 
+import camp.nextstep.edu.missionutils.Randoms;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import lotto.enums.LottoRule;
 import lotto.message.ExceptionMessage;
 
 public class Lotto {
@@ -40,6 +42,10 @@ public class Lotto {
         if (invalid) {
             throw new IllegalArgumentException(ExceptionMessage.NOT_A_LOTTO.getMessage());
         }
+    }
+
+    public static Lotto issue() {
+        return new Lotto(Randoms.pickUniqueNumbersInRange(LottoRule.MIN_NUMBER.value, LottoRule.MAX_NUMBER.value, LottoRule.LOTTO_SIZE.value));
     }
 
     public boolean contains(final Bonus bonus) {
