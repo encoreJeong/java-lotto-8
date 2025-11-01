@@ -19,7 +19,7 @@ public class Lotto {
     private void validate(List<Integer> numbers) {
         validateSize(numbers);
         validateEachUnique(numbers);
-        validateBetween(1, 45, numbers);
+        validateBetweenLottoMinMax(numbers);
     }
 
     private static void validateSize(List<Integer> numbers) {
@@ -35,9 +35,9 @@ public class Lotto {
         }
     }
 
-    private void validateBetween(int min, int max, List<Integer> numbers) {
+    private void validateBetweenLottoMinMax(List<Integer> numbers) {
         boolean invalid = numbers.stream()
-                                .anyMatch(n -> n < min || n > max);
+                                .anyMatch(n -> n < LottoRule.MIN_NUMBER.value || n > LottoRule.MAX_NUMBER.value);
 
         if (invalid) {
             throw new IllegalArgumentException(ExceptionMessage.NOT_A_LOTTO.getMessage());

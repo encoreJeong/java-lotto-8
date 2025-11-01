@@ -22,19 +22,19 @@ public class Budget {
     }
 
     private static void validateAffordable(int budget) {
-        if(getAffordableLottoQuantity(budget) < MIN_PURCHASE_QUANTITY) {
+        if(calculateAffordableLottoQuantity(budget) < LottoRule.MIN_PURCHASE_QUANTITY.value) {
             throw new IllegalArgumentException(ExceptionMessage.BUDGET_INSUFFICIENT.getMessage());
         }
     }
 
     private static void validateNoRemainder(int budget) {
-        if(budget % LOTTO_PRICE != 0) {
+        if(budget % LottoRule.LOTTO_PRICE.value != 0) {
             throw new IllegalArgumentException(ExceptionMessage.REMAINDER_EXIST.getMessage());
         }
     }
 
-    private static int getAffordableLottoQuantity(int budget) {
-        return budget / LOTTO_PRICE;
+    private static int calculateAffordableLottoQuantity(int budget) {
+        return budget / LottoRule.LOTTO_PRICE.value;
     }
 
     public int getAffordableLottoQuantity() {

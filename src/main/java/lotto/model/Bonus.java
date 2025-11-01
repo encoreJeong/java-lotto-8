@@ -1,11 +1,9 @@
 package lotto.model;
 
+import lotto.enums.LottoRule;
 import lotto.message.ExceptionMessage;
 
 public class Bonus {
-
-    private static final int MIN = 1;
-    private static final int MAX = 45;
 
     private final int number;
 
@@ -19,11 +17,11 @@ public class Bonus {
     }
 
     private static void validate(int bonus) {
-        validateBetween(MIN, MAX, bonus);
+        validateBetween(LottoRule.MIN_NUMBER, LottoRule.MAX_NUMBER, bonus);
     }
 
-    private static void validateBetween(int min, int max, int bonus) {
-        if(bonus < min || bonus > max)
+    private static void validateBetween(LottoRule min, LottoRule max, int bonus) {
+        if(bonus < min.value || bonus > max.value)
             throw new IllegalArgumentException(ExceptionMessage.NOT_A_BONUS.getMessage());
     }
 
