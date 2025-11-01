@@ -30,6 +30,10 @@ public enum WinningRank {
                         .orElse(NONE);
     }
 
+    public int getPrize() {
+        return prize;
+    }
+
     private static boolean isMatched(MatchResultDTO result, WinningRank rank) {
         return rank.matchedNumberCount == result.matchedNumberCount()
                 && rank.isBonusMatch.matches(result.isBonsMatched());

@@ -1,21 +1,19 @@
-package lotto.model;
+package lotto.service;
 
 import java.util.List;
 import lotto.dto.MatchResultDTO;
 import lotto.enums.WinningRank;
+import lotto.model.Lottos;
+import lotto.model.WinningCondition;
 
-public class LottoMatcher {
+public class MatchingService {
 
     private final Lottos lottos;
     private final WinningCondition winningCondition;
 
-    private LottoMatcher(Lottos lottos, WinningCondition winningCondition) {
+    public MatchingService(Lottos lottos, WinningCondition winningCondition) {
         this.lottos = lottos;
         this.winningCondition = winningCondition;
-    }
-
-    public static LottoMatcher of(Lottos lottos,  WinningCondition winningCondition) {
-        return new LottoMatcher(lottos, winningCondition);
     }
 
     public List<WinningRank> getMatchResults() {

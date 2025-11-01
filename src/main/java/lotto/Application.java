@@ -8,9 +8,10 @@ import lotto.io.ConsoleOutputProvider;
 import lotto.io.InputProvider;
 import lotto.io.OutputProvider;
 import lotto.model.Lotto;
-import lotto.model.LottoMatcher;
+import lotto.service.MatchingService;
 import lotto.model.Lottos;
 import lotto.model.WinningCondition;
+import lotto.service.PrizeService;
 import lotto.view.View;
 import lotto.view.ViewBuilder;
 
@@ -36,8 +37,13 @@ public class Application {
             issuedLottos.add(Lotto.issue());
         }
 
-        LottoMatcher matcher = LottoMatcher.of(issuedLottos, winningCondition);
-        List<WinningRank> result = matcher.getMatchResults();
+        MatchingService matcherService = new MatchingService(issuedLottos, winningCondition);
+        List<WinningRank> result = matcherService.getMatchResults();
+
+        PrizeService prizeService =  new PrizeService(result, budget);
+        long totalPrize = prizeService.calculateTotalPrize();
+        float roi = prizeService.calculateROI();
+
 
 
     }

@@ -1,13 +1,17 @@
-package lotto.model;
+package lotto.service;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
 import lotto.enums.WinningRank;
+import lotto.model.Bonus;
+import lotto.model.Lotto;
+import lotto.model.Lottos;
+import lotto.model.WinningCondition;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class LottoMatcherTest {
+class MatchingServiceTest {
 
     @DisplayName("매칭 성공")
     @Test
@@ -31,8 +35,8 @@ class LottoMatcherTest {
         WinningCondition winningCondition = WinningCondition.of(winningNumbers, bonus);
 
         //when
-        LottoMatcher matcher = LottoMatcher.of(issuedLottos, winningCondition);
-        List<WinningRank> results = matcher.getMatchResults();
+        MatchingService matchingService = new MatchingService(issuedLottos, winningCondition);
+        List<WinningRank> results = matchingService.getMatchResults();
 
         //then
         assertEquals(1, results.stream().filter(rank -> rank == WinningRank.FIRST).count());
