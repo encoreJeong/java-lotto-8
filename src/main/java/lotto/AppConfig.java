@@ -38,7 +38,8 @@ public class AppConfig {
                 .build();
 
         /**
-         * 아래의 Service들은 런타임에 필요한 인자가 결정된다.
+         * Service는 두가지 이상의 모델 동작을 오케스트레이션 한다.
+         * 이들은 필요한 인자가 런타임에 결정된다.
          * 따라서, controller에는 factory를 넘겨 런터임에 Service 객체를 생성할 수 있게한다.
          */
         MatchingServiceFactory matchingFactory = MatchingService::new;
