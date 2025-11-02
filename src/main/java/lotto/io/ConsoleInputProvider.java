@@ -22,10 +22,6 @@ public class ConsoleInputProvider implements InputProvider {
 
     @Override
     public String readConsoleLine() {
-        try {
-            return Console.readLine();
-        } catch (NoSuchElementException e) {
-            throw new IllegalArgumentException(ExceptionMessage.EMPTY.getMessage());
-        }
+        return Console.readLine();
     }
 }
