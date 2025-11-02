@@ -1,19 +1,19 @@
-package lotto.view;
+package lotto.view.input.decorator;
 
-import java.util.List;
-import lotto.enums.WinningRank;
 import lotto.model.Bonus;
 import lotto.model.Budget;
 import lotto.model.Lotto;
-import lotto.model.Lottos;
 import lotto.model.WinningCondition;
+import lotto.view.input.InputView;
 
-public class ExceptionHandlingView implements View {
+public class ExceptionHandlingInputView implements InputView {
 
-    private final View delegate;
+    private final InputView delegate;
+    private final InputExceptionHandler exceptionHandler;
 
-    public ExceptionHandlingView(View delegate) {
+    public ExceptionHandlingInputView(InputView delegate, InputExceptionHandler exceptionHandler) {
         this.delegate = delegate;
+        this.exceptionHandler = exceptionHandler;
     }
 
     @Override
@@ -22,7 +22,7 @@ public class ExceptionHandlingView implements View {
             try {
                 return delegate.getBudget();
             } catch (IllegalArgumentException e) {
-                show(e.getMessage());
+                exceptionHandler.handle(e);
             }
         }
     }
@@ -37,24 +37,9 @@ public class ExceptionHandlingView implements View {
                 Bonus number =  getBonus();
                 return WinningCondition.of(winningNumbers, number);
             } catch (IllegalArgumentException e) {
-                show(e.getMessage());
+                exceptionHandler.handle(e);
             }
         }
-    }
-
-    @Override
-    public void showLottoQuantity(int quantity) {
-        delegate.showLottoQuantity(quantity);
-    }
-
-    @Override
-    public void showLottos(Lottos lottos) {
-        delegate.showLottos(lottos);
-    }
-
-    @Override
-    public void showResult(List<WinningRank> result, float roi) {
-        delegate.showResult(result, roi);
     }
 
     @Override
@@ -63,7 +48,7 @@ public class ExceptionHandlingView implements View {
             try {
                 return delegate.getLotto();
             } catch (IllegalArgumentException e) {
-                show(e.getMessage());
+                exceptionHandler.handle(e);
             }
         }
     }
@@ -74,13 +59,9 @@ public class ExceptionHandlingView implements View {
             try {
                 return delegate.getBonus();
             } catch (IllegalArgumentException e) {
-                show(e.getMessage());
+                exceptionHandler.handle(e);
             }
         }
     }
 
-    @Override
-    public void show(String message) {
-        delegate.show(message);
-    }
 }

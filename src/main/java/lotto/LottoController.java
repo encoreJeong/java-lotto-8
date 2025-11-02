@@ -9,31 +9,34 @@ import lotto.service.MatchingService;
 import lotto.service.MatchingServiceFactory;
 import lotto.service.PrizeService;
 import lotto.service.PrizeServiceFactory;
-import lotto.view.View;
+import lotto.view.input.InputView;
+import lotto.view.output.OutputView;
 
 public class LottoController {
 
-    private final View view;
+    private final InputView inputView;
+    private final OutputView outputView;
     private final MatchingServiceFactory matchingServiceFactory;
     private final PrizeServiceFactory prizeServiceFactory;
 
-    public LottoController(View view, MatchingServiceFactory matchingServiceFactory, PrizeServiceFactory prizeServiceFactory) {
-        this.view = view;
+    public LottoController(InputView inputView, OutputView outputView, MatchingServiceFactory matchingServiceFactory, PrizeServiceFactory prizeServiceFactory) {
+        this.inputView = inputView;
+        this.outputView = outputView;
         this.matchingServiceFactory = matchingServiceFactory;
         this.prizeServiceFactory = prizeServiceFactory;
     }
 
     public void run() {
 
-        Budget budget = view.getBudget();
+        Budget budget = inputView.getBudget();
 
         int lottoQuantity = budget.getAffordableLottoQuantity();
         Lottos issuedLottos = Lottos.issueLottoForNTimes(lottoQuantity);
 
-        view.showLottoQuantity(lottoQuantity);
-        view.showLottos(issuedLottos);
+        outputView.showLottoQuantity(lottoQuantity);
+        outputView.showLottos(issuedLottos);
 
-        WinningCondition winningCondition = view.getWinningCondition();
+        WinningCondition winningCondition = inputView.getWinningCondition();
 
         MatchingService matcherService = matchingServiceFactory.create(issuedLottos, winningCondition);
         List<WinningRank> result = matcherService.getMatchResults();
@@ -41,7 +44,7 @@ public class LottoController {
         PrizeService prizeService =  prizeServiceFactory.create(result, budget);
         float roi = prizeService.calculateROI();
 
-        view.showResult(result, roi);
+        outputView.showResult(result, roi);
 
     }
 }
