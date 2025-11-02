@@ -14,10 +14,10 @@ class PrizeServiceTest {
     @Test
     void calculateROI() {
         //given
-        Budget budget = Budget.of(6_000);
-        List<WinningRank> result = List.of(WinningRank.FIRST, WinningRank.SECOND,  WinningRank.THIRD, WinningRank.FOURTH, WinningRank.FIFTH, WinningRank.NONE);
+        Budget budget = Budget.of(2_000);
+        List<WinningRank> result = List.of(WinningRank.FOURTH, WinningRank.FIFTH);
 
-        float actualROI = 338592.5f;
+        float actualROI = 2750.0f;
 
         PrizeService service = new PrizeService(result, budget);
 

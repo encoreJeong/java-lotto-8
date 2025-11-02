@@ -15,8 +15,8 @@ public class PrizeService {
     }
 
     public float calculateROI() {
-        double roi = (double) calculateTotalPrize() / budget.getInt();
-        return Math.round(roi * 10) / 10f;
+        double roi = ((double) calculateTotalPrize() / budget.getInt()) * 100;
+        return Math.round(roi * 100) / 100f;
     }
 
     private long calculateTotalPrize() {
