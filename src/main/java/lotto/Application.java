@@ -28,7 +28,6 @@ public class Application {
                 .build();
 
         Budget budget = view.getBudget();
-        WinningCondition winningCondition = view.getWinningCondition();
 
         int lottoQuantity = budget.getAffordableLottoQuantity();
 
@@ -37,15 +36,18 @@ public class Application {
             issuedLottos.add(Lotto.issue());
         }
 
+        view.showLottoQuantity(lottoQuantity);
+        view.showLottos(issuedLottos);
+
+        WinningCondition winningCondition = view.getWinningCondition();
+
         MatchingService matcherService = new MatchingService(issuedLottos, winningCondition);
         List<WinningRank> result = matcherService.getMatchResults();
 
         PrizeService prizeService =  new PrizeService(result, budget);
-        long totalPrize = prizeService.calculateTotalPrize();
         float roi = prizeService.calculateROI();
 
-
-
+        view.showResult(result, roi);
     }
 
 }

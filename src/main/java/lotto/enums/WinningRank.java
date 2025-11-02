@@ -1,16 +1,18 @@
 package lotto.enums;
 
 import java.util.Arrays;
+import java.util.List;
 import lotto.dto.MatchResultDTO;
+import lotto.io.MessageFormatter;
 
 public enum WinningRank {
 
-    NONE(0, BonusMatchedStatus.ANY, 0),
-    FIRST(6, BonusMatchedStatus.ANY, 2_000_000_000),
-    SECOND(5, BonusMatchedStatus.TRUE,30_000_000),
-    THIRD(5, BonusMatchedStatus.ANY,1_500_000),
+    FIFTH(3, BonusMatchedStatus.ANY, 5_000),
     FOURTH(4, BonusMatchedStatus.ANY, 50_000),
-    FIFTH(3, BonusMatchedStatus.ANY, 5_000);
+    THIRD(5, BonusMatchedStatus.ANY,1_500_000),
+    SECOND(5, BonusMatchedStatus.TRUE,30_000_000),
+    FIRST(6, BonusMatchedStatus.ANY, 2_000_000_000),
+    NONE(0, BonusMatchedStatus.ANY, 0);
 
     private final int matchedNumberCount;
     private final BonusMatchedStatus isBonusMatch;
@@ -48,6 +50,31 @@ public enum WinningRank {
                 case FALSE-> !b;
             };
         }
+
+        public String toString() {
+            if(this == TRUE) {
+                return ", 보너스 볼 일치 ";
+            }
+            return " ";
+        }
     }
 
+    @Override
+    public String toString() {
+
+        if(this == NONE) {
+            return "";
+        }
+
+        StringBuilder message = new StringBuilder();
+        message.append(matchedNumberCount).append("개 일치")
+                .append(isBonusMatch.toString())
+                .append(MessageFormatter.formatPrize(prize));
+
+        return message.toString();
+    }
+
+    public static List<WinningRank> allValues() {
+        return List.of(FIFTH, FOURTH, THIRD, SECOND, FIRST);
+    }
 }

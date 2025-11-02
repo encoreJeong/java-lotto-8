@@ -1,8 +1,11 @@
 package lotto.view;
 
+import java.util.List;
+import lotto.enums.WinningRank;
 import lotto.model.Bonus;
 import lotto.model.Budget;
 import lotto.model.Lotto;
+import lotto.model.Lottos;
 import lotto.model.WinningCondition;
 
 public class ExceptionHandlingView implements View {
@@ -37,6 +40,21 @@ public class ExceptionHandlingView implements View {
                 show(e.getMessage());
             }
         }
+    }
+
+    @Override
+    public void showLottoQuantity(int quantity) {
+        delegate.showLottoQuantity(quantity);
+    }
+
+    @Override
+    public void showLottos(Lottos lottos) {
+        delegate.showLottos(lottos);
+    }
+
+    @Override
+    public void showResult(List<WinningRank> result, float roi) {
+        delegate.showResult(result, roi);
     }
 
     @Override

@@ -14,12 +14,12 @@ public class PrizeService {
         this.budget = budget;
     }
 
-    public long calculateTotalPrize() {
-        return result.stream().mapToLong(WinningRank::getPrize).sum();
-    }
-
     public float calculateROI() {
         double roi = (double) calculateTotalPrize() / budget.getInt();
         return Math.round(roi * 10) / 10f;
+    }
+
+    private long calculateTotalPrize() {
+        return result.stream().mapToLong(WinningRank::getPrize).sum();
     }
 }
