@@ -2,6 +2,7 @@ package lotto.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class Lottos {
@@ -18,6 +19,14 @@ public class Lottos {
 
     public static Lottos none() {
         return new Lottos(List.of());
+    }
+
+    public static Lottos issueLottoForNTimes(int lottoQuantity) {
+        return Lottos.of(
+                    IntStream.range(0, lottoQuantity)
+                        .mapToObj(i -> Lotto.issue())
+                        .toList()
+                );
     }
 
     public void add(Lotto lotto) {
