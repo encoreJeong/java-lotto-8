@@ -9,7 +9,7 @@ public enum WinningRank {
 
     FIFTH(3, BonusMatchedStatus.ANY, 5_000),
     FOURTH(4, BonusMatchedStatus.ANY, 50_000),
-    THIRD(5, BonusMatchedStatus.ANY,1_500_000),
+    THIRD(5, BonusMatchedStatus.FALSE,1_500_000),
     SECOND(5, BonusMatchedStatus.TRUE,30_000_000),
     FIRST(6, BonusMatchedStatus.ANY, 2_000_000_000),
     NONE(0, BonusMatchedStatus.ANY, 0);
